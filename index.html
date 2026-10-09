@@ -1,39 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AI Career Assistant</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="navbar">
-
-        <div class="logo">
-            AI Career Assistant
-        </div>
+        <div class="logo">AI Career Assistant</div>
 
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Resume</a>
-            <a href="#">Jobs</a>
-            <a href="#">Interview</a>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#job-tracker">Job Tracker</a>
+            <a href="https://github.com/itssureshkumar150113-bit/ai-career-assistant"
+               target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
-
     </nav>
 
-
     <!-- Hero Section -->
-    <section class="hero">
-
+    <section class="hero" id="home">
         <div class="hero-content">
-
             <h1>
                 Build Your Career
                 <span>Smarter with AI</span>
@@ -44,18 +37,14 @@
                 and prepare for interviews with AI-powered tools.
             </p>
 
-            <button id="getStartedBtn">
+            <button id="getStartedBtn" type="button">
                 Get Started
             </button>
-
         </div>
-
     </section>
 
-
-    <!-- Features Section -->
-    <section class="features">
-
+    <!-- Features -->
+    <section class="features" id="features">
         <h2>Everything You Need for Your Career</h2>
 
         <div class="feature-container">
@@ -63,44 +52,122 @@
             <div class="feature-card">
                 <h3>📄 Resume Analyzer</h3>
                 <p>
-                    Analyze your resume and get AI-powered
-                    suggestions to improve it.
+                    Get feedback on your resume and identify
+                    areas to improve. AI analysis is coming soon.
                 </p>
             </div>
 
             <div class="feature-card">
                 <h3>💼 Job Tracker</h3>
                 <p>
-                    Track your job applications and monitor
-                    your application progress.
+                    Add job applications, update their status,
+                    and monitor your application progress.
                 </p>
             </div>
 
             <div class="feature-card">
                 <h3>🎤 Interview Prep</h3>
                 <p>
-                    Practice interview questions and receive
-                    AI-powered feedback.
+                    Prepare for technical and HR interviews.
+                    AI-powered practice is coming soon.
                 </p>
             </div>
 
         </div>
+    </section>
+
+    <!-- Job Application Tracker -->
+    <section class="tracker-section" id="job-tracker">
+
+        <div class="tracker-heading">
+            <h2>Your Job Application Tracker</h2>
+            <p>Keep all your job applications organized in one place.</p>
+        </div>
+
+        <!-- Dashboard Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p>Total Applications</p>
+                <h3 id="totalApplications">0</h3>
+            </div>
+
+            <div class="stat-card">
+                <p>Interviews</p>
+                <h3 id="interviewCount">0</h3>
+            </div>
+
+            <div class="stat-card">
+                <p>Offers</p>
+                <h3 id="offerCount">0</h3>
+            </div>
+        </div>
+
+        <!-- Add Application Form -->
+        <form id="applicationForm" class="application-form">
+
+            <div class="form-field">
+                <label for="companyName">Company Name</label>
+                <input
+                    type="text"
+                    id="companyName"
+                    placeholder="e.g. Google"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="jobTitle">Job Role</label>
+                <input
+                    type="text"
+                    id="jobTitle"
+                    placeholder="e.g. Software Engineer"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="applicationStatus">Application Status</label>
+                <select id="applicationStatus" required>
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Offer">Offer</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="appliedDate">Date Applied</label>
+                <input type="date" id="appliedDate" required>
+            </div>
+
+            <button type="submit" class="form-submit">
+                + Add Application
+            </button>
+
+        </form>
+
+        <!-- Applications will appear here -->
+        <div class="applications-heading">
+            <h3>Your Applications</h3>
+        </div>
+
+        <div id="applicationList" class="application-list"></div>
+
+        <div id="emptyState" class="empty-state" hidden>
+            <h3>No applications yet</h3>
+            <p>Add your first job application using the form above.</p>
+        </div>
 
     </section>
 
-
     <!-- Footer -->
-    <footer>
-
-        <p>
-            © 2026 AI Career Assistant
-        </p>
-
+    <footer id="footer">
+        <p>© 2026 AI Career Assistant | Built with JavaScript</p>
     </footer>
-
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
