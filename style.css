@@ -472,3 +472,78 @@ html {
         width: 100%;
     }
 }
+
+/* Dashboard Analytics */
+
+.analytics-section {
+    max-width: 900px;
+    margin: 0 auto 35px;
+}
+
+.analytics-section > h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.analytics-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.analytics-card h4 {
+    margin-bottom: 20px;
+}
+
+.status-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chart-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.chart-track {
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chart-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 8px;
+    transition: width 0.3s ease;
+}
+
+.conversion-rate {
+    font-size: 48px;
+    font-weight: bold;
+    color: #2563eb;
+    margin: 25px 0 10px;
+}
+
+.analytics-note {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+}

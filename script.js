@@ -19,6 +19,9 @@ const STORAGE_KEY = "aiCareerApplications";
 const searchInput=document.getElementById("searchApplications");
 const statusFilter =document.getElementById("statusFilter");
 
+const statusChart = document.getElementById("statusChart");
+const conversionRate =document.getElementById("conversionRate");
+
 
 // 1. Make Get Started scroll to the tracker
 getStartedBtn.addEventListener("click", function () {
@@ -92,6 +95,7 @@ function updateDashboardStats() {
             return application.status === "Offer";
         }
     ).length;
+    updateAnalytics();
 }
 
 
@@ -277,6 +281,68 @@ applicationList.addEventListener("click", function (event) {
 
 searchInput.addEventListener("input",renderApplications);
 statusFilter.addEventListener("change",renderApplications);
+
+function updateAnalytics() {
+
+    const total = applications.length;
+
+    const statuses = [
+        "Applied",
+        "Interview",
+        "Rejected",
+        "Offer"
+    ];
+
+    statusChart.replaceChildren();
+
+    statuses.forEach(function (status) {
+
+        const count = applications.filter(function (application) {
+            return application.status === status;
+        }).length;
+
+        const percentage = total === 0
+            ? 0
+            : (count / total) * 100;
+
+        const chartItem = document.createElement("div");
+
+        const label = document.createElement("div");
+        label.className = "chart-label";
+
+        const statusName = document.createElement("span");
+        statusName.textContent = status;
+
+        const statusCount = document.createElement("span");
+        statusCount.textContent = count;
+
+        label.append(statusName, statusCount);
+
+        const track = document.createElement("div");
+        track.className = "chart-track";
+
+        const fill = document.createElement("div");
+        fill.className = "chart-fill";
+        fill.style.width = percentage + "%";
+
+        track.appendChild(fill);
+
+        chartItem.append(label, track);
+        statusChart.appendChild(chartItem);
+    });
+
+    const interviewCount = applications.filter(function (application) {
+        return application.status === "Interview" ||
+               application.status === "Offer";
+    }).length;
+
+    const rate = total === 0
+        ? 0
+        : (interviewCount / total) * 100;
+
+    conversionRate.textContent = rate.toFixed(1) + "%";
+}
+
 
 // 10. Display saved applications when the page opens
 renderApplications();
