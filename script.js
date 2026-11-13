@@ -188,6 +188,16 @@ function renderApplications() {
             }
         );
 
+             // Create Edit button
+        const editButton = document.createElement("button");
+
+        editButton.type = "button";
+        editButton.className = "edit-btn";
+        editButton.textContent = "Edit";
+
+        editButton.dataset.action = "edit";
+        editButton.dataset.id = application.id;
+
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.className = "delete-btn";
@@ -195,7 +205,7 @@ function renderApplications() {
         deleteButton.dataset.action = "delete";
         deleteButton.dataset.id = application.id;
 
-        actions.append(statusSelect, deleteButton);
+        actions.append(statusSelect, editButton,deleteButton);
         card.append(info, actions);
         applicationList.appendChild(card);
     });
@@ -343,6 +353,82 @@ function updateAnalytics() {
     conversionRate.textContent = rate.toFixed(1) + "%";
 }
 
+// Edit an existing job application
+applicationList.addEventListener("click", function (event) {
+
+    const editButton = event.target.closest(
+        'button[data-action="edit"]'
+    );
+
+    if (!editButton) {
+        return;
+    }
+
+    const application = applications.find(function (item) {
+        return item.id === editButton.dataset.id;
+    });
+
+    if (!application) {
+        return;
+    }
+
+    const newCompany = prompt(
+        "Edit company name:",
+        application.company
+    );
+
+    if (newCompany === null) {
+        return;
+    }
+
+    const newRole = prompt(
+        "Edit job role:",
+        application.role
+    );
+
+    if (newRole === null) {
+        return;
+    }
+
+    const newDate = prompt(
+        "Edit application date (YYYY-MM-DD):",
+        application.appliedDate
+    );
+
+    if (newDate === null) {
+        return;
+    }
+
+    const company = newCompany.trim();
+    const role = newRole.trim();
+    const date = newDate.trim();
+
+    // Validate the edited information
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+    const parsedDate = new Date(`${date}T00:00:00`);
+
+    const validDate =
+        datePattern.test(date) &&
+        !Number.isNaN(parsedDate.getTime()) &&
+        parsedDate.getFullYear() === Number(date.slice(0, 4)) &&
+        parsedDate.getMonth() + 1 === Number(date.slice(5, 7)) &&
+        parsedDate.getDate() === Number(date.slice(8, 10));
+
+    if (!company || !role || !validDate) {
+        alert("Please enter valid company, role, and date values.");
+        return;
+    }
+
+    application.company = company;
+    application.role = role;
+    application.appliedDate = date;
+
+    saveApplications();
+    renderApplications();
+
+    alert("Application updated successfully!");
+});
 
 // 10. Display saved applications when the page opens
 renderApplications();

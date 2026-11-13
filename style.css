@@ -547,3 +547,18 @@ html {
         grid-template-columns: 1fr;
     }
 }
+/* Edit Application Button */
+
+.edit-btn {
+    padding: 11px 14px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.edit-btn:hover {
+    background: #bfdbfe;
+}
