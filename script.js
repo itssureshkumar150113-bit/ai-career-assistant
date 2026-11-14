@@ -22,6 +22,7 @@ const statusFilter =document.getElementById("statusFilter");
 const statusChart = document.getElementById("statusChart");
 const conversionRate =document.getElementById("conversionRate");
 
+const exportCsvBtn =document.getElementById("exportCsvBtn");
 
 // 1. Make Get Started scroll to the tracker
 getStartedBtn.addEventListener("click", function () {
@@ -96,6 +97,8 @@ function updateDashboardStats() {
         }
     ).length;
     updateAnalytics();
+
+    exportCsvBtn.disabled =applications.length === 0;
 }
 
 
@@ -429,6 +432,74 @@ applicationList.addEventListener("click", function (event) {
 
     alert("Application updated successfully!");
 });
+
+
+// Export all job applications to a CSV file
+function exportApplicationsToCSV() {
+
+    if (applications.length === 0) {
+        alert("No applications available to export.");
+        return;
+    }
+
+    const headers = [
+        "Company",
+        "Job Role",
+        "Status",
+        "Date Applied"
+    ];
+
+    // Escape values so commas, quotes and newlines work in CSV.
+    // Prefix spreadsheet-formula-like values to prevent execution.
+    function escapeCSV(value) {
+        let text = String(value ?? "");
+
+        if (/^[\s]*[=+\-@\t\r]/.test(text)) {
+            text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    const rows = applications.map(function (application) {
+        return [
+            application.company,
+            application.role,
+            application.status,
+            application.appliedDate
+        ].map(escapeCSV).join(",");
+    });
+
+    const csvContent = [
+        headers.map(escapeCSV).join(","),
+        ...rows
+    ].join("\r\n");
+
+    // UTF-8 BOM helps Excel recognize Unicode characters.
+    const blob = new Blob(
+        ["\uFEFF", csvContent],
+        { type: "text/csv;charset=utf-8;" }
+    );
+
+    const downloadUrl = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = "AI-Career-Assistant-Applications.csv";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(function () {
+        URL.revokeObjectURL(downloadUrl);
+    }, 1000);
+}
+
+
+// Run export when the button is clicked
+exportCsvBtn.addEventListener("click", exportApplicationsToCSV);
+
 
 // 10. Display saved applications when the page opens
 renderApplications();

@@ -562,3 +562,44 @@ html {
 .edit-btn:hover {
     background: #bfdbfe;
 }
+
+
+/* CSV Export Button */
+
+.applications-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+#exportCsvBtn {
+    padding: 12px 18px;
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#exportCsvBtn:hover {
+    background: #15803d;
+}
+
+#exportCsvBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .applications-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #exportCsvBtn {
+        width: 100%;
+    }
+}
