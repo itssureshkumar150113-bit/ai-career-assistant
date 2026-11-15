@@ -603,3 +603,305 @@ html {
         width: 100%;
     }
 }
+
+
+/* ===================================
+   FEATURE 7 — PROFESSIONAL UI
+=================================== */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --background: #f8fafc;
+    --border: #e2e8f0;
+}
+
+/* Global Improvements */
+
+body {
+    background: var(--background);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    transition: background 0.2s ease,
+                transform 0.2s ease;
+}
+
+button:not(:disabled):hover {
+    transform: translateY(-2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* Navigation */
+
+.navbar {
+    min-height: 76px;
+    height: auto;
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 2px 15px rgba(15,23,42,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: var(--primary);
+    font-size: 23px;
+    letter-spacing: -0.5px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+/* Hero Section */
+
+.hero {
+    min-height: 540px;
+    background: linear-gradient(
+        135deg,
+        #eff6ff 0%,
+        #f8fafc 55%,
+        #e0e7ff 100%
+    );
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: -1.5px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 620px;
+    margin: 0 auto 30px;
+}
+
+.hero button {
+    background: var(--primary);
+    padding: 15px 34px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.2);
+}
+
+.hero button:hover {
+    background: var(--primary-dark);
+    opacity: 1;
+}
+
+/* Feature Cards */
+
+.feature-card {
+    flex: 1 1 270px;
+    max-width: 350px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(15,23,42,0.03);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+}
+
+/* Dashboard Cards */
+
+.stat-card,
+.analytics-card,
+.application-form,
+.application-card {
+    border-color: var(--border);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(15,23,42,0.04);
+}
+
+.stat-card {
+    padding: 30px 20px;
+}
+
+.stat-card h3 {
+    font-size: 38px;
+    font-weight: 800;
+}
+
+/* Form */
+
+.application-form {
+    gap: 22px;
+    padding: 32px;
+}
+
+.form-field input,
+.form-field select,
+.status-select {
+    border-radius: 9px;
+    padding: 13px;
+}
+
+.form-submit {
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* Application Cards */
+
+.application-card {
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.2s ease;
+}
+
+.application-card:hover {
+    box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+}
+
+.application-info h3 {
+    color: var(--text-main);
+    font-size: 18px;
+}
+
+.application-info p {
+    color: var(--text-muted);
+}
+
+.application-actions button {
+    border-radius: 9px;
+}
+
+/* Responsive Improvements */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 15px 5%;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 18px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 420px;
+        padding: 55px 20px;
+    }
+
+    .hero h1 {
+        letter-spacing: -0.5px;
+    }
+
+    .features {
+        padding: 55px 5%;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .application-form {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .application-actions {
+        width: 100%;
+    }
+
+    .application-actions button {
+        flex: 1;
+    }
+
+    .status-select {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .analytics-card {
+        padding: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+/* Prevent sticky navbar from covering sections */
+#home,
+#features,
+#job-tracker {
+    scroll-margin-top: 100px;
+}
+
+/* Improve page spacing */
+
+.hero {
+    min-height: 470px;
+}
+
+.features {
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+.features h2 {
+    margin-bottom: 30px;
+}
+
+.tracker-section {
+    padding-top: 55px;
+}
+
+@media (max-width: 768px) {
+    #home,
+    #features,
+    #job-tracker {
+        scroll-margin-top: 135px;
+    }
+
+    .hero {
+        min-height: 400px;
+    }
+}
