@@ -905,3 +905,107 @@ select:focus-visible {
         min-height: 400px;
     }
 }
+
+
+/* ===================================
+   FEATURE 8 — RESUME ANALYZER
+=================================== */
+
+.resume-section {
+    padding: 70px 8%;
+    background: #ffffff;
+    scroll-margin-top: 100px;
+}
+
+.resume-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.resume-heading h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.resume-heading p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.resume-container {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.resume-upload-box {
+    padding: 40px;
+    text-align: center;
+    background: #f8fafc;
+    border: 2px dashed #93c5fd;
+    border-radius: 16px;
+}
+
+.resume-upload-box h3 {
+    margin-bottom: 12px;
+}
+
+.resume-upload-box > p {
+    margin-bottom: 20px;
+    color: #64748b;
+}
+
+#resumeFile {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 12px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+#resumeFileName {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+}
+
+#analyzeResumeBtn {
+    padding: 14px 30px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#analyzeResumeBtn:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+#analyzeResumeBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#resumeMessage {
+    margin-top: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .resume-section {
+        padding: 50px 5%;
+        scroll-margin-top: 135px;
+    }
+
+    .resume-heading h2 {
+        font-size: 27px;
+    }
+
+    .resume-upload-box {
+        padding: 25px 18px;
+    }
+}

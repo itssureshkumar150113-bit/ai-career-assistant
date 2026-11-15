@@ -502,4 +502,72 @@ exportCsvBtn.addEventListener("click", exportApplicationsToCSV);
 
 
 // 10. Display saved applications when the page opens
+
+
+
+// ===================================
+// FEATURE 8 — RESUME UPLOAD
+// ===================================
+
+const resumeFileInput = document.getElementById("resumeFile");
+const resumeFileName = document.getElementById("resumeFileName");
+const analyzeResumeBtn = document.getElementById("analyzeResumeBtn");
+const resumeMessage = document.getElementById("resumeMessage");
+
+let selectedResume = null;
+
+resumeFileInput.addEventListener("change", function () {
+
+    const file = resumeFileInput.files[0];
+
+    selectedResume = null;
+    analyzeResumeBtn.disabled = true;
+    resumeMessage.textContent = "";
+
+    if (!file) {
+        resumeFileName.textContent = "No file selected";
+        return;
+    }
+
+    const extension = file.name.split(".").pop().toLowerCase();
+
+    if (!["pdf", "docx"].includes(extension)) {
+        resumeFileName.textContent = "Invalid file format";
+        resumeMessage.textContent =
+            "Please upload a PDF or DOCX resume.";
+        resumeFileInput.value = "";
+        return;
+    }
+
+    // Maximum file size: 5 MB
+    if (file.size > 5 * 1024 * 1024) {
+        resumeFileName.textContent = "File too large";
+        resumeMessage.textContent =
+            "Please upload a file smaller than 5 MB.";
+        resumeFileInput.value = "";
+        return;
+    }
+
+    selectedResume = file;
+
+    resumeFileName.textContent = file.name;
+    analyzeResumeBtn.disabled = false;
+
+    resumeMessage.textContent =
+        "Resume selected successfully!";
+});
+
+analyzeResumeBtn.addEventListener("click", function () {
+
+    if (!selectedResume) {
+        resumeMessage.textContent =
+            "Please select a resume first.";
+        return;
+    }
+
+    resumeMessage.textContent =
+        "Resume selected. AI analysis is coming soon!";
+
+});
+
 renderApplications();

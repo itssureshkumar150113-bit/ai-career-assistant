@@ -18,6 +18,7 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#features">Features</a>
+            <a href="resume-analyzer">Resume Analyzer</a>
             <a href="#job-tracker">Job Tracker</a>
             <a href="https://github.com/itssureshkumar150113-bit/ai-career-assistant"
                target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -75,6 +76,55 @@
 
         </div>
     </section>
+     
+
+<!-- Resume Analyzer Section -->
+<section class="resume-section" id="resume-analyzer">
+
+    <div class="resume-heading">
+        <h2>AI Resume Analyzer</h2>
+        <p>
+            Upload your resume to prepare it for
+            AI-powered career feedback.
+        </p>
+    </div>
+
+    <div class="resume-container">
+
+        <div class="resume-upload-box">
+
+            <h3>Upload Your Resume</h3>
+
+            <p>
+                Supported formats: PDF and DOCX
+            </p>
+
+            <input
+                type="file"
+                id="resumeFile"
+                accept=".pdf,.docx"
+                aria-label="Choose resume file"
+            >
+
+            <p id="resumeFileName">
+                No file selected
+            </p>
+
+            <button
+                type="button"
+                id="analyzeResumeBtn"
+                disabled
+            >
+                Analyze Resume
+            </button>
+
+            <p id="resumeMessage" role="status" aria-live="polite"></p>
+
+        </div>
+
+    </div>
+
+</section>
 
     <!-- Job Application Tracker -->
     <section class="tracker-section" id="job-tracker">
