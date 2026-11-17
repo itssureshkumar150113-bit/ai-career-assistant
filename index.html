@@ -119,6 +119,10 @@
             </button>
 
             <p id="resumeMessage" role="status" aria-live="polite"></p>
+            <div id ="resumeTextPreview" hidden>
+                <h3>Extracted Resume Text</h3>
+                <pre id="extractedResumeText"></pre>
+            </div>
 
         </div>
 
@@ -264,7 +268,11 @@
         <p>© 2026 AI Career Assistant | Built with JavaScript</p>
     </footer>
 
-    <script src="script.js"></script>
+    
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.9.0/mammoth.browser.min.js"></script>
+     <script src="script.js"></script>
+ 
 
 </body>
 </html>

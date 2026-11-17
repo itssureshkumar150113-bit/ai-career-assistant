@@ -524,6 +524,11 @@ resumeFileInput.addEventListener("change", function () {
     analyzeResumeBtn.disabled = true;
     resumeMessage.textContent = "";
 
+
+   resumeTextPreview.hidden = true;
+   extractedResumeText.textContent = "";
+
+
     if (!file) {
         resumeFileName.textContent = "No file selected";
         return;
@@ -557,17 +562,90 @@ resumeFileInput.addEventListener("change", function () {
         "Resume selected successfully!";
 });
 
-analyzeResumeBtn.addEventListener("click", function () {
 
+/* Feature 8 - Stage 2: Resume Text Extraction */
+
+const resumeTextPreview = document.getElementById("resumeTextPreview");
+const extractedResumeText = document.getElementById("extractedResumeText");
+
+// Tell PDF.js where its worker file is located
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+analyzeResumeBtn.addEventListener("click", async function () {
     if (!selectedResume) {
-        resumeMessage.textContent =
-            "Please select a resume first.";
+        resumeMessage.textContent = "Please select a resume first.";
         return;
     }
 
-    resumeMessage.textContent =
-        "Resume selected. AI analysis is coming soon!";
+    analyzeResumeBtn.disabled = true;
+    resumeMessage.textContent = "Reading your resume...";
+    resumeTextPreview.hidden = true;
+    extractedResumeText.textContent = "";
 
+    try {
+        const file = selectedResume;
+        const extension = file.name.split(".").pop().toLowerCase();
+
+        let resumeText = "";
+
+        if (extension === "pdf") {
+            const arrayBuffer = await file.arrayBuffer();
+
+            const pdf = await pdfjsLib.getDocument({
+                data: new Uint8Array(arrayBuffer)
+            }).promise;
+
+            const pages = [];
+
+            for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                const page = await pdf.getPage(pageNumber);
+                const content = await page.getTextContent();
+
+                const pageText = content.items
+                    .map(item => item.str)
+                    .join(" ");
+
+                pages.push(pageText);
+            }
+
+            resumeText = pages.join("\n\n");
+
+        } else if (extension === "docx") {
+            const arrayBuffer = await file.arrayBuffer();
+
+            const result = await mammoth.extractRawText({
+                arrayBuffer: arrayBuffer
+            });
+
+            resumeText = result.value;
+
+        } else {
+            throw new Error("Unsupported file format.");
+        }
+
+        if (!resumeText.trim()) {
+            throw new Error(
+                "No readable text found. Scanned resumes may require OCR."
+            );
+        }
+
+        extractedResumeText.textContent = resumeText;
+        resumeTextPreview.hidden = false;
+
+        resumeMessage.textContent =
+            "Resume text extracted successfully!";
+
+    } catch (error) {
+        console.error("Resume extraction error:", error);
+
+        resumeMessage.textContent =
+            "Could not read resume: " + error.message;
+
+    } finally {
+        analyzeResumeBtn.disabled = false;
+    }
 });
+
 
 renderApplications();
